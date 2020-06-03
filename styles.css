@@ -1,0 +1,148 @@
+.icon{
+    height:6vw;;
+    width:6vw;
+    align-items:center;
+}
+
+.selection-text{
+    width:60vw;
+    height:5vh;
+    position:absolute;
+    text-align:center;
+    font-size: 5vh;
+    background-color:rgb(190, 190 ,190);
+}
+
+#player-selection-text{
+    margin:0 0;
+    position:absolute;
+    bottom:0;
+}
+
+#computer-selection-text{
+    margin:0 0;
+    position:absolute;
+    top:0;
+}
+
+button.option, button.display{
+    margin:0 4vw 0 0vw;
+}
+
+#player-buttons{
+    position: absolute;
+    left:16vw;
+    top:1vh;
+}
+
+#computer-buttons{
+    position: absolute;
+    left:16vw;
+    bottom:1vh;
+}
+
+.player-half{
+    align:center;
+}
+
+
+h1#name-tag{
+    background-color:white;
+    border: 5px solid black;
+    width:24vw;
+    padding: 1vw;
+    text-align:center;
+    position:relative;
+    left:17vw;
+}
+
+#play{
+    width:24vw;
+    font-size:50px;
+    color:white;
+    background-color: black;
+    border:5px solid grey;
+    position:relative;
+    left:18vw;
+}
+
+p#round-result{
+    font-size:5vw;
+    text-align:center;
+}
+
+
+.option.selected{
+    border: 5px solid green;
+}
+
+.display.selected{
+    border: 5px solid red;
+}
+
+
+body{
+    margin:0 0;
+}
+
+
+div{
+    margin: 0 0px;
+    position:relative;
+}
+
+#middle-section{
+    width:100vw;
+    height:60vh;
+
+}
+
+.player-half{
+    width:60vw;
+    height:20vh;
+    position:relative;
+    left:20vw;
+
+}
+
+
+
+.score-section{
+    width:20vw;
+    height:60vh;
+    position:absolute;
+    top:0vh;
+    text-align:center;
+    font-size: 3vw;
+}
+
+#computer-score-value, #player-score-value{
+    font-size:9vw;
+}
+
+#computer-score-containter{
+    position:absolute;
+    left:80vw;
+
+}
+
+#play-result-section{
+    
+    width:60vw;
+    height:60vh;
+    position:absolute;
+    left:20vw;
+    background: rgb(230, 230, 230);
+
+}
+
+
+button{
+    background-color: white;
+    border:5px solid black;
+}
+
+
+body{
+ background-color:rgb(172, 169, 169);
+}

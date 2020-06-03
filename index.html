@@ -1,18 +1,171 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Rock Paper Scissors</title>
-  
+    <meta charset="utf-8">
+    <link href="styles.css" rel="stylesheet">
+    <title>Rock Paper Scissors</title>
 </head>
 
 <body>
 
+<div id="player-half" class="player-half">
+    <section id="player-buttons" class="player-section">
+        <button id="user-rock" class="option">
+            <img id="rock-icon" class="icon" src="icons/rock.png" value="rock">
+        </button>
+
+        <button id="user-paper" class="option">
+            <img id="paper-icon" class="icon" src="icons/paper.png" value="paper">
+        </button>
+
+        <button id="user-scissors" class="option">
+            <img id="scissors-icon" class="icon" src="icons/scissors.png" value="scissors">
+        </button>
+    </section>
+    <p id="player-selection-text" class="selection-text"></p>
+</div>
+
+<div id="middle-section">
+    <div  id="play-result-section">
+        <h1 id="name-tag">Rock, Paper, Scissors!</h1>
+        <button id="play">
+            PLAY
+        </button>
+        <p id="round-result">PICK YOUR PLAY</p>
+    </div>
+
+    <div id="player-score-containter" class="score-section">
+        <span id="player-score-ident">PLAYER</span><br>
+        <span id="player-score-value">0</span>
+    </div>
+
+    <div id="computer-score-containter" class="score-section">
+        <span id="computer-score-ident">COMP</span><br>
+        <span id="computer-score-value">0</span>
+    </div>
+</div>
+
+<div id="computer-half" class="player-half">
+    <p id="computer-selection-text" class="selection-text"></p>
+    <section id="computer-buttons" class="player-section">
+        <button id="comp-rock" class="display" disabled>
+            <img id="rock-icon" class="icon" src="icons/rock.png" value="rock">
+        </button>
+
+        <button id="comp-paper" class="display" disabled>
+            <img id="paper-icon" class="icon" src="icons/paper.png" value="paper">
+        </button>
+
+        <button id="comp-scissors" class="display" disabled>
+            <img id="scissors-icon" class="icon" src="icons/scissors.png" value="scissors">
+        </button>
+    </section>
+    
+</div>
+
   <script>
+let userSelection="";
+let computerSelection="";
+let resultString="";
+let roundResult=0;
+let computerScore=0;
+let userScore=0;
+
+function selectItem(item){
+    item.classList.add("selected");
+    item.setAttribute("pressed", "");
+};
+
+function unselectItem(item){
+    item.classList.remove("selected");
+    item.removeAttribute("pressed", "");
+};
+
+function rockSelected(){
+    userSelection="rock";
+    selectUser();
+};
+
+function paperSelected(){
+    userSelection="paper";
+    selectUser();
+};
+
+function scissorsSelected(){
+    userSelection="scissors";
+    selectUser();
+};
 
 function computerPlay(){
     let choices=["Rock", "Paper", "Scissors"];
     return choices[Math.floor(Math.random()*3)];
+};
+
+function playGame(){
+    if(userSelection===""){
+        alert("Please select rock, paper, or scissors");
+        return;
+    };
+    computerSelection=computerPlay();
+    roundResult=gameRound(userSelection, computerSelection);
+    selectComputer();
+    roundScore();
+    displayResult();
+};
+
+function displayResult(){
+    document.querySelector("span#computer-score-value").innerHTML=computerScore;
+    document.querySelector("span#player-score-value").innerHTML=userScore;
+    document.querySelector("p#round-result").innerHTML=resultString;
+}
+
+function roundScore(){
+    if(roundResult<0){
+        computerScore++;
+        resultString=`${computerSelection.toUpperCase()} BEATS ${userSelection.toUpperCase()}, YOU LOSE!`;
+    }else if(roundResult>0){
+        userScore++;
+        resultString=`${userSelection.toUpperCase()} BEATS ${computerSelection.toUpperCase()}, YOU WIN!!`;
+    }else {
+        resultString=`DRAW!`
+    }
+    ;
+};
+
+function selectComputer(){
+    let options=Array.from(document.querySelectorAll('.display'));
+    for(let i=0; i<options.length; i++){unselectItem(options[i]);};
+    
+    if(computerSelection.toLowerCase()==="rock"){
+        let button=document.querySelector('button#comp-rock');
+        selectItem(button);
+    } else if (computerSelection.toLowerCase()==="paper"){
+        let button=document.querySelector('button#comp-paper');
+        selectItem(button);
+    } else if (computerSelection.toLowerCase()==="scissors"){
+        let button=document.querySelector('button#comp-scissors');
+        selectItem(button);
+    };
+
+    document.querySelector('#computer-selection-text').innerHTML=computerSelection.toUpperCase();
+};
+
+function selectUser(){
+    let options=Array.from(document.querySelectorAll('.option'));
+    for(let i=0; i<options.length; i++){unselectItem(options[i]);};
+    
+    if(userSelection.toLowerCase()==="rock"){
+        let button=document.querySelector('button#user-rock');
+        selectItem(button);
+    } else if (userSelection.toLowerCase()==="paper"){
+         button=document.querySelector('button#user-paper');
+        selectItem(button);
+    } else if (userSelection.toLowerCase()==="scissors"){
+         button=document.querySelector('button#user-scissors');
+        selectItem(button);
+    };
+
+    document.querySelector('#player-selection-text').innerHTML=userSelection.toUpperCase();
 };
 
 function gameRound(playerSelection, computerSelection){
@@ -33,7 +186,6 @@ function gameRound(playerSelection, computerSelection){
         else if (computerSelection==="Rock"){return -1;};
     };
 };
-
 
 function game(){
     let playerScore=0;
@@ -61,6 +213,13 @@ function game(){
     };
 };
    
+
+document.querySelector('button#user-rock').addEventListener('click', rockSelected);
+document.querySelector('button#user-paper').addEventListener('click', paperSelected);
+document.querySelector('button#user-scissors').addEventListener('click', scissorsSelected);
+
+
+document.querySelector('button#play').addEventListener('click', playGame);
 
   </script>
 </body>
